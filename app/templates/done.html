@@ -1,0 +1,6 @@
+<div class="done">
+  <a ng-repeat="c in check" ng-mouseover="hover($index)" ng-mouseleave="stopHover()"
+    ng-class="checkColor($index)" ng-click="setCheck($index)">
+    <i class="fa" ng-class="checkClass(c, $index)"></i>
+  </a>
+</div>

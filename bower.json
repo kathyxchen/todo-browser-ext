@@ -1,0 +1,12 @@
+{
+	"name": "to-do-ext",
+	"version": "0.0.1",
+	"dependencies": {
+		"angular": "latest",
+		"bootstrap": "latest",
+		"lodash": "latest",
+		"underscore.string": "latest",
+		"font-awesome": "latest",
+		"jquery": "latest"
+	}
+}

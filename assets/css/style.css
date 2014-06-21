@@ -1,0 +1,16 @@
+.done {
+	font-size: 175%;
+	padding: 0 0.5em;
+}
+
+.done > a {
+	.text-decoration: none;
+}
+
+.done .done-highlight, .done.done-highlight:hover {
+	color: #99CCFF;
+}
+
+.done .done-normal, .done.done-normal:hover {
+	color: #66CCCC;
+}
