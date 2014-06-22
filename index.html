@@ -11,9 +11,9 @@
 
 	<body ng-app="toDoApp">
 		<div ng-controller="listCtrl" class="container">
-			<div class="page-header">
-				<h1>gettin' things done:</h1>
-			</div>
+		<div class="page-header">
+			<h1>gettin' things done:</h1>
+		</div>
 		<form role="form" ng-submit="addTask(newTask.main, newTask.detail)">
 			<div class="row">
 				<div class="col-sm-5">
@@ -38,23 +38,31 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="task in tasks track by $index">
+				<tr ng-repeat="task in tasks | startFrom:currentPage*pageSize | limitTo:pageSize track by $index">
 					<td>
 						<div checkbox score="task.score" class="pull-left"></div>
 						<div class="pull-left">
-							<strong>{{task.main | caps}}</strong><br />
-							<small>{{task.detail | caps}}</small>
+							<span ng-hide="editing" ng-click="editing = true"> 
+								<strong>{{task.main | caps}}</strong><br />
+							<small>{{task.detail | caps}}</small></span>
+							<form ng-show="editing" ng-submit="editing = false">
+								<input type="text" ng-model="task.main" placeholder="Task" ng-required/>
+								<input type="text" ng-model="task.detail" placeholder="(details)"/>
+								<button class="btn" type="submit">Save</button>
+							</form>
 						</div>
 						<div class="pull-right">
 							<button type="button" class="btn btn-danger pull-right" ng-click="deleteTask($index)">
 								<i class="fa fa-trash-o"></i>
 							</button>
-							<button type="button" class="btn btn-danger pull-right" ng-click="editTask($index)">
-								<i class="fa fa-pencil"></i>
-							</button>
 						</div>
 					</td>
 				</tr>
+			<div class="pull-right">
+				<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="fa fa-angle-double-left"></button>
+    			{{currentPage+1}}/{{numberOfPages()}}
+    			<button ng-disabled="currentPage >= tasks.length/pageSize - 1" ng-click="currentPage=currentPage+1" class="fa fa-angle-double-right"></button>
+    		</div>
 			</tbody>
 		</table>
 		<div id="menu"> 

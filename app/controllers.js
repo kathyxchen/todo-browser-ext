@@ -2,16 +2,21 @@ angular.module("toDoApp.controllers", []).controller("listCtrl", function($scope
 	$scope.tasks = taskService.get();
 	$scope.newTask = { };
 
+	$scope.currentPage = 0;
+	$scope.pageSize = 5;
+
 	$scope.isEmpty = function(str) {
 		return _.isBlank(str);
 	};
 
-	$scope.addTask = function(main, detail) {
-		$scope.tasks.push({
-			main: main,
-			detail: detail,
-			score: -1
-		});
+	$scope.addTask = function(m, d) {
+		if (m.length > 0) {
+			$scope.tasks.push({
+				main: m,
+				detail: d,
+				score: -1
+			});
+		};	
 		$scope.newTask.main = "";
 		$scope.newTask.detail ="";
 	};
@@ -20,12 +25,9 @@ angular.module("toDoApp.controllers", []).controller("listCtrl", function($scope
 		$scope.tasks.splice(idx, 1);
 	};
 
-	$scope.editTask = function(idx) {
-		/*enable editing!*/
-	};
-
 	$scope.deleteAll = function() {
 		$scope.tasks = [];
+		$scope.currentPage = 0;
 	};
 
 	$scope.deleteChecked = function(arr, i) {
@@ -39,7 +41,7 @@ angular.module("toDoApp.controllers", []).controller("listCtrl", function($scope
 		if (pos < $scope.tasks.length) {
 			$scope.deleteChecked($scope.tasks, pos);
 		}
-	}
+	};
 
 	$scope.$watch('tasks', function(newValue, oldValue) {
 		if (newValue !== oldValue) {
@@ -47,4 +49,11 @@ angular.module("toDoApp.controllers", []).controller("listCtrl", function($scope
 		}
 	}, true);
 
+	$scope.numberOfPages = function() {
+		var pgs = Math.ceil($scope.tasks.length / $scope.pageSize);
+		if (pgs !== 0) {
+			return pgs;
+		}
+		return 1;
+	};
 });
