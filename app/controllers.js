@@ -1,9 +1,9 @@
 angular.module("toDoApp.controllers", []).controller("listCtrl", function($scope, taskService) {
 	$scope.tasks = taskService.get();
 	$scope.newTask = { };
-
+	
 	$scope.currentPage = 0;
-	$scope.pageSize = 5;
+	$scope.pageSize = 10;
 
 	$scope.isEmpty = function(str) {
 		return _.isBlank(str);
@@ -56,4 +56,9 @@ angular.module("toDoApp.controllers", []).controller("listCtrl", function($scope
 		}
 		return 1;
 	};
+
+	$scope.getDate = function() {
+		var d = new Date();
+		return (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+	}
 });

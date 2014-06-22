@@ -7,6 +7,6 @@
 		"lodash": "latest",
 		"underscore.string": "latest",
 		"font-awesome": "latest",
-		"jquery": "latest"
+		"jquery": "latest",
 	}
 }
