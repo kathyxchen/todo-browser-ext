@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "To-do List",
+  "description": "Because lists.",
+  "version": "1.0",
+  "browser_action": {
+    "default_title": "To-do",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {"matches": ["http://*/*"], 
+      "js": ["libs/jquery/dist/jquery.js",
+            "libs/jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.min.js",
+            "libs/angular/angular.min.js",
+            "libs/lodash/dist/lodash.min.js",
+            "libs/underscore.string/dist/underscore.string.min.js",
+            "assets/sortable/sortable.js",
+            "app/app.js",
+            "app/controllers.js",
+            "app/services.js",
+            "app/filters.js",
+            "app/directives.js"],
+       "css": ["libs/bootstrap/dist/css/bootstrap.min.css",
+              "libs/font-awesome/css/font-awesome.min.css",
+              "assets/css/style.css"]
+    }
+  ],
+  "permissions": ["http://*/*", "tabs", "https://*/*"]
+}

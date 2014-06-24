@@ -14,3 +14,27 @@
 .done .done-normal, .done.done-normal:hover {
 	color: #66CCCC;
 }
+
+.form-control {
+	width: 110%;
+}
+
+.container {
+	width: 500px;
+}
+
+#taskform {
+	float: left;
+}
+
+#detailform {
+	float: left;
+}
+
+#addbtn {
+	float: left;
+}
+
+#date {
+	color: #66CCCC;
+}
