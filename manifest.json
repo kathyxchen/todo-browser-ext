@@ -4,6 +4,11 @@
   "name": "To-do List",
   "description": "Because lists.",
   "version": "1.0",
+  "icons": {
+    "16":"owl2.png",
+    "48": "owl.png",
+    "128":"ghost.png"
+  },
   "browser_action": {
     "default_title": "To-do",
     "default_popup": "popup.html"
