@@ -12,7 +12,7 @@
 	<body ng-app="toDoApp">
 		<div ng-controller="listCtrl" class="container">
 		<div class="page-header">
-			<h2 class="title">gettin' things done:</h2>
+		<h3 class="title">gettin' things done <small>{{getDate()}}</small></h3>
 		</div>
 		<form role="form" ng-submit="addTask(newTask.main, newTask.detail)">
 			<div class="row">
@@ -25,28 +25,31 @@
 					<input type="text" class="form-control" name="note" placeholder="(details)" ng-model="newTask.detail" />
 				</div>
 				<div id="addbtn" class="col-sm-2">
-					<button id="add" type="submit" class="btn btn-default form-control" ng-disabled="isEmpty(newTask.main)">Add</button>
+					<button id="add" type="submit" class="btn btn-default form-control" ng-disabled="isEmpty(newTask.main)">add</button>
 				</div>
 			</form>
 			</div>
-		<div class="alert alert-info" ng-if="!tasks.length">
-			Nothing here! 
-		</div>
 		<table class="table table-striped table-condensed">
 			<thead>
 				<tr>
-					<th id="date">
-						{{getDate()}}
-						<div class="pull-right">
-						<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="fa fa-angle-double-left"></button>
-    					{{currentPage+1}}/{{numberOfPages()}}
-    					<button ng-disabled="currentPage >= tasks.length/pageSize - 1" ng-click="currentPage=currentPage+1" class="fa fa-angle-double-right"></button>
+					<th>
+						<div class="btn-group btn-group-xs" id="menu">
+							<button class="btn btn-default" type="button" ng-click="deleteAll()">(clear all)</button>
+							<button class="btn btn-default" type="button" ng-click="deleteChecked($scope.tasks, 0)">(clear checked)</button>
+						</div>
+						<div class="btn-group btn-group-xs pull-right" id="pgs">
+							<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="fa fa-angle-double-left"></button>
+    						{{currentPage+1}}/{{numberOfPages()}}
+    						<button ng-disabled="currentPage >= tasks.length/pageSize - 1" ng-click="currentPage=currentPage+1" class="fa fa-angle-double-right"></button>
     					</div>
     				</th>
 				</tr>
 			</thead>
 			<tbody ui-sortable ng-model="tasks">
-				<tr ng-repeat="task in tasks | startFrom:currentPage*pageSize | limitTo:pageSize track by $index">
+				<div class="alert alert-info" ng-if="!tasks.length">
+					Nothing here! 
+				</div>
+				<tr class="trow" ng-repeat="task in tasks | startFrom:currentPage*pageSize | limitTo:pageSize track by $index">
 					<td>
 						<div checkbox score="task.score" class="pull-left"></div>
 						<div class="pull-left">
@@ -60,7 +63,7 @@
 							</form>
 						</div>
 						<div class="pull-right">
-							<button type="button" class="btn btn-danger pull-right" ng-click="deleteTask($index)">
+							<button id="dbtn" type="button" ng-click="deleteTask($index)">
 								<i class="fa fa-trash-o"></i>
 							</button>
 						</div>
@@ -68,13 +71,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<div id="menu"> 
-			<button type="button" class="btn btn-default btn-sm pull-left" ng-click="deleteAll()">
-			(clear all)</button>
-			<button type="button" class="btn btn-default btn-sm pull-left" ng-click="deleteChecked($scope.tasks, 0)">
-			(clear checked)</button>
-			<br />
-		</div>
 		<div class="alert alert-success">
 			Notes go here.
 		</div>
